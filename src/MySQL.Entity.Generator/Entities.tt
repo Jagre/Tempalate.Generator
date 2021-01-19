@@ -1,0 +1,83 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ include file="Manager.ttinclude" #>
+<#@ include file="EntityHelper.ttinclude" #>
+<#@ import namespace="System.Configuration" #>
+
+<# 
+    // 数据库连接
+    var connectionString = @"server=192.168.56.102;uid=root;pwd=123456;charset=utf8;";
+
+
+    // 需要解析的数据库
+    var databaseName = "test";
+    var database = new List<string> { databaseName };
+	//命名空间
+	var namespaceStr=$"{databaseName.First().ToString().ToUpper() + databaseName.Substring(1, databaseName.Length - 1)}.Entities";
+ 
+    // 文件版权信息
+    var copyright = DateTime.Now.Year + " haha";
+    var version = Environment.Version;
+ 
+    var manager = Manager.Create(Host, GenerationEnvironment);
+    var entities = EntityHelper.GetEntities(connectionString, database);
+ 
+    foreach(Entity entity in entities)
+    {
+        manager.StartNewFile(entity.EntityName + ".cs");
+#>
+//-----------------------------------------------------------------------
+// <copyright file=" <#= entity.EntityName #>.cs" company="xxxx Enterprises">
+// * Copyright (C) <#= copyright #>
+// * version : <#= version #>
+// * FileName: <#= entity.EntityName #>.cs
+// * history : Created by T4 <#= DateTime.Now #> 
+// * 
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
+ 
+namespace <#= namespaceStr #>
+{
+    /// <summary>
+    /// <#= entity.EntityName #> Entity Model
+    /// </summary>    
+    public class <#= entity.EntityName #>
+    {
+<#
+        for(int i = 0; i < entity.Fields.Count; i++)
+        {
+            var field = entity.Fields[i];
+#>        
+        /// <summary>
+        /// <#= field.Comment #>
+        /// </summary>
+<#    
+        if(field.IsPrimaryKey && field.IsAutoIncrement)
+        {
+#>
+        [Dapper.Contrib.Extensions.Key]
+<#
+        }
+#>
+<#    
+        if(field.IsPrimaryKey && !field.IsAutoIncrement)
+        {
+#>
+        [Dapper.Contrib.Extensions.ExplicitKey]
+<#
+        }
+#>
+        public <#= field.Type #> <#= field.Name #> { get; set; }
+<#
+        } 
+#>
+    }
+}
+<#        
+        manager.EndBlock(); 
+    }
+ 
+    manager.Process(true);
+
+#>
