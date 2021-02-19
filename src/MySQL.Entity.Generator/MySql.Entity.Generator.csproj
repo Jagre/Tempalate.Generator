@@ -56,6 +56,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>

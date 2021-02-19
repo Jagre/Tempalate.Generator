@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------
-// <copyright file=" Product.cs" company="xxxx Enterprises">
+// <copyright file=" Order.cs" company="xxxx Enterprises">
 // * Copyright (C) 2021 haha
 // * version : 4.0.30319.42000
-// * FileName: Product.cs
+// * FileName: Order.cs
 // * history : Created by T4 02/19/2021 18:39:44 
 // * 
 // </copyright>
@@ -13,34 +13,44 @@ using System;
 namespace Test.Entities
 {
     /// <summary>
-    /// Product Entity Model
+    /// Order Entity Model
     /// </summary>    
-    public partial class Product
+    public partial class Order
     {
         
         /// <summary>
-        /// Product Id
+        /// Order ID
         /// </summary>
         [Dapper.Contrib.Extensions.Key]
         public int Id { get; set; }
         
         /// <summary>
-        /// Product Name
+        /// Order Number
         /// </summary>
-        public string Name { get; set; }
+        public string OrderNo { get; set; }
         
         /// <summary>
-        /// Price
+        /// Product ID
         /// </summary>
-        public decimal Price { get; set; }
+        public int ProductId { get; set; }
         
         /// <summary>
-        /// Creator
+        /// Sales Price
+        /// </summary>
+        public decimal SalesPrice { get; set; }
+        
+        /// <summary>
+        /// Qty
+        /// </summary>
+        public int Qty { get; set; }
+        
+        /// <summary>
+        /// Create By 
         /// </summary>
         public string CreatedBy { get; set; }
         
         /// <summary>
-        /// Create time
+        /// Create date
         /// </summary>
         public DateTime CreatedDate { get; set; }
     }

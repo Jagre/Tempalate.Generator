@@ -3,7 +3,7 @@
 // * Copyright (C) 2021 haha
 // * version : 4.0.30319.42000
 // * FileName: ProductStatus.cs
-// * history : Created by T4 01/19/2021 20:45:39 
+// * history : Created by T4 02/19/2021 18:39:44 
 // * 
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace Test.Entities
     /// <summary>
     /// ProductStatus Entity Model
     /// </summary>    
-    public class ProductStatus
+    public partial class ProductStatus
     {
         
         /// <summary>

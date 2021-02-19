@@ -4,14 +4,17 @@
 <#@ import namespace="System.Configuration" #>
 
 <# 
+    // 文件输出路径
+    var outputPath = ""; //@"E:\src\csharp\MySDK\test\MySDK.Dapper.Test\Models";
+
     // 数据库连接
     var connectionString = @"server=192.168.56.102;uid=root;pwd=123456;charset=utf8;";
-
 
     // 需要解析的数据库
     var databaseName = "test";
     var database = new List<string> { databaseName };
-	//命名空间
+	
+    //命名空间
 	var namespaceStr=$"{databaseName.First().ToString().ToUpper() + databaseName.Substring(1, databaseName.Length - 1)}.Entities";
  
     // 文件版权信息
@@ -42,7 +45,7 @@ namespace <#= namespaceStr #>
     /// <summary>
     /// <#= entity.EntityName #> Entity Model
     /// </summary>    
-    public class <#= entity.EntityName #>
+    public partial class <#= entity.EntityName #>
     {
 <#
         for(int i = 0; i < entity.Fields.Count; i++)
@@ -78,6 +81,6 @@ namespace <#= namespaceStr #>
         manager.EndBlock(); 
     }
  
-    manager.Process(true);
+    manager.Process(true, outputPath);
 
 #>

@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySql.Entity.Generator", "src\MySQL.Entity.Generator\MySql.Entity.Generator.csproj", "{F1A021F8-A78A-4E6D-AB86-DFD91DFCD823}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySQL.Repository.Generator", "src\MySQL.Repository.Generator\MySQL.Repository.Generator.csproj", "{24515672-F21E-42BB-81F1-CBFB811FF1C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F1A021F8-A78A-4E6D-AB86-DFD91DFCD823}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1A021F8-A78A-4E6D-AB86-DFD91DFCD823}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1A021F8-A78A-4E6D-AB86-DFD91DFCD823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24515672-F21E-42BB-81F1-CBFB811FF1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24515672-F21E-42BB-81F1-CBFB811FF1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24515672-F21E-42BB-81F1-CBFB811FF1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24515672-F21E-42BB-81F1-CBFB811FF1C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
