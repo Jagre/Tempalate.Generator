@@ -33,7 +33,7 @@
 // * Copyright (C) <#= copyright #>
 // * version : <#= version #>
 // * FileName: <#= entity.EntityName #>.cs
-// * history : Created by T4 <#= DateTime.Now #> 
+// * history : Created at <#= DateTime.Now #> 
 // * 
 // </copyright>
 //-----------------------------------------------------------------------
@@ -56,7 +56,7 @@ namespace <#= namespaceStr #>
         /// <#= field.Comment #>
         /// </summary>
 <#    
-        if(field.IsPrimaryKey && field.IsAutoIncrement)
+        if(field.IsPrimaryKey)
         {
 #>
         [Dapper.Contrib.Extensions.Key]

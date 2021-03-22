@@ -9,8 +9,8 @@ namespace Entity.Generator
 {
     public class Generator
     {
-        private string InterfaceTemplate = @"
-using Test.Entities;
+        private string _interfaceTemplate = @"
+using {3};
 using MySDK.Dapper;
 using MySDK.Dapper.Extensions;
 
@@ -21,8 +21,8 @@ namespace {2}
     }
 }";
 
-        private string ClassTempate = @"
-using Test.Entity;
+        private string _classTempate = @"
+using {3};
 
 namespace {2}
 {
@@ -33,7 +33,7 @@ namespace {2}
 ";
 
 
-        public int Generating(string path, string interfaceNamespace = "Test.Repository", string classNamespace = "Test.Repository")
+        public int Generating(string path, string interfaceNamespace = "Test.Repository", string classNamespace = "Test.Repository", string entityNamespace = "Test.Entities")
         {
             var effectCount = 0;
             var assembly = typeof(Order).Assembly;
@@ -73,8 +73,11 @@ namespace {2}
                 {
                     if (!string.IsNullOrEmpty(key))
                     {
-                        Writing(path, name, key, interfaceNamespace, classNamespace);
-                        effectCount++;
+                        if (Writing(path, name, key, interfaceNamespace, classNamespace, entityNamespace))
+                        {
+                            Console.WriteLine($"{name}'s repository created. [OK]");
+                            effectCount++;
+                        }
                     }
                     else
                     {
@@ -89,14 +92,17 @@ namespace {2}
             return effectCount;
         }
 
-        private bool Writing(string dirPath, string name, string key, string interfaceNamespace, string classNamespace)
+        private bool Writing(string dirPath, string name, string key, string interfaceNamespace, string classNamespace, string entityNamespace)
         {
             var interfaceFilePath = Path.Combine(dirPath, "Interface", "I" + name + "Repository.cs");
             if (File.Exists(interfaceFilePath) == false)
             {
                 using (var fs = File.Create(interfaceFilePath))
                 {
-                    var it = InterfaceTemplate.Replace(@"{0}", name).Replace(@"{1}", key).Replace(@"{2}", interfaceNamespace);
+                    var it = _interfaceTemplate.Replace(@"{0}", name)
+                        .Replace(@"{1}", key)
+                        .Replace(@"{2}", interfaceNamespace)
+                        .Replace(@"{3}", entityNamespace);
                     byte[] itb = Encoding.UTF8.GetBytes(it);
                     fs.Write(itb, 0, itb.Length);
                 }
@@ -106,7 +112,10 @@ namespace {2}
             {
                 using (var fs = File.Create(implementFilePath))
                 {
-                    var ct = ClassTempate.Replace(@"{0}", name).Replace(@"{1}", key).Replace(@"{2}", classNamespace);
+                    var ct = _classTempate.Replace(@"{0}", name)
+                        .Replace(@"{1}", key)
+                        .Replace(@"{2}", classNamespace)
+                        .Replace(@"{3}", entityNamespace);
                     byte[] ctb = Encoding.UTF8.GetBytes(ct);
                     fs.Write(ctb, 0, ctb.Length);
                 }
